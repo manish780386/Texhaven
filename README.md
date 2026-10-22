@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Send SMS from any browser with built-in scam and abuse protection. No app, no account.
 
@@ -77,3 +78,6 @@ python manage.py gen_keys                       # generate secrets
 python manage.py createsuperuser                # admin at /<ADMIN_URL>/
 python manage.py reveal_message <track_id> --reason "case 123"   # decrypt for a legal request (audited)
 ```
+=======
+# Texhaven
+>>>>>>> f6cd439d18b25f52bbcc65f830b43fb7a89c8bbe
