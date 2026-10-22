@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-padding-top: 5rem; }
+body { @apply bg-foam font-sans text-ink antialiased; }
+h1, h2, h3 { @apply font-display tracking-tight; }
+
+:focus-visible { outline: 3px solid #F5A623; outline-offset: 2px; border-radius: 4px; }
+
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60; }
+.btn-primary { @apply btn bg-ink text-white hover:bg-tide; }
+.btn-beam { @apply btn bg-beam text-ink hover:brightness-95; }
+.btn-ghost { @apply btn border border-ink/20 text-ink hover:bg-ink/5; }
+.field { @apply w-full rounded-lg border border-ink/20 bg-white px-4 py-3 text-ink placeholder:text-muted/70 focus:border-ink; }
+.label { @apply mb-1.5 block text-sm font-semibold; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

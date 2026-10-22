@@ -1,0 +1,16 @@
+Django>=5.1,<5.3
+djangorestframework>=3.15,<3.17
+django-cors-headers>=4.4,<5
+drf-spectacular>=0.27,<0.30
+celery>=5.4,<5.6
+redis>=5.0,<7
+stripe>=10
+twilio>=9
+phonenumbers>=8.13
+cryptography>=43
+requests>=2.32
+dj-database-url>=2.2
+psycopg[binary]>=3.2
+gunicorn>=22
+whitenoise>=6.7
+python-dotenv>=1.0

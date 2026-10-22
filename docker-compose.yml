@@ -1,0 +1,42 @@
+# Full local stack: docker compose up --build
+# Needs backend/.env (copy backend/.env.example). Open http://localhost:8080
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: texhaven, POSTGRES_USER: texhaven, POSTGRES_PASSWORD: texhaven }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U texhaven"], interval: 5s, retries: 10 }
+
+  redis:
+    image: redis:7-alpine
+
+  backend: &backend
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgres://texhaven:texhaven@db:5432/texhaven
+      REDIS_URL: redis://redis:6379/0
+      CELERY_EAGER: "False"
+      NUM_PROXIES: "1"
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      FRONTEND_URL: http://localhost:8080
+      PUBLIC_API_URL: http://localhost:8080
+    depends_on: { db: { condition: service_healthy }, redis: { condition: service_started } }
+
+  worker:
+    <<: *backend
+    command: celery -A config worker -l info
+    ports: []
+
+  beat:
+    <<: *backend
+    command: celery -A config beat -l info
+    ports: []
+
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on: [backend]
+
+volumes:
+  pgdata:
